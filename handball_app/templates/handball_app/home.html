@@ -1,0 +1,14 @@
+{% extends 'handball_app/base.html' %}
+{% load static %}
+
+{% block titulo %}
+    Inicio
+{% endblock titulo %}
+
+{% block datos %}
+<h1>Explora el contenido!</h1>
+<a class="btn btn-light btn-xl" href="{% url 'jugadores' %}">Jugadores</a>
+<a class="btn btn-light btn-xl" href="{% url 'clubes' %}">Clubes</a>
+<a class="btn btn-light btn-xl" href="{% url 'ligas' %}">Ligas</a>
+<a class="btn btn-light btn-xl" href="{% url 'arenas' %}">Arenas</a>
+{% endblock datos %}

@@ -1,0 +1,72 @@
+{% extends 'handball_app/base.html' %}
+{% load static %}
+
+{% block titulo %}
+    Jugadores
+{% endblock titulo %}
+
+{% block subtitulo %}
+<p class="text-white-75 mb-5">Explora la base de datos de jugadores..</p>
+<a class="btn btn-primary btn-xl" href="#datos">Ver listado completo!</a>
+{% endblock subtitulo %}  
+
+{% block about %}
+<h2 class="text-white mt-0">Base de Jugadores!</h2>
+<hr class="divider divider-light" />
+<p class="text-white-75 mb-4">Listado de todos los jugadores de handball profesionales, activos y retirados, que compiten en todas las ligas del mundo.</p>
+{% endblock about %}  
+
+{% block datos %}
+<h3>Buscar Jugadores</h3>
+<form action="/jugadoresBuscar" method="get">
+    {% csrf_token %}
+    <p><i class="fa-solid fa-magnifying-glass"></i> Buscar: <input type="text" name="buscar", id="buscar"><input class="btn btn-primary"type="submit" value="Buscar"></p>
+    {% if filtro_ingresado %}
+        {% if filtro_ingresado == 'Filtro no ingresado!!!' %}
+            <p style="color: red;"> {{ filtro_ingresado }}</p>
+        {% elif 'Ningún objeto cumple el filtro' in filtro_ingresado %}
+            <p style="color: red;"> {{ filtro_ingresado }}</p>
+        {% else %}
+            <p style="color: lightsalmon;"> {{ filtro_ingresado }}</p>
+        {% endif %}
+    {% endif %}
+    
+</form>
+<br>
+<br>
+<h1>Listado de Jugadores</h1>
+<table class="table table-striped table-dark">
+    <thead style="color:lightsalmon">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Equipo</th>
+            <th scope="col">Nacionalidad</th>
+            <th scope="col">Fecha Nac.</th>
+            <th scope="col">Altura</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for j in jugador_list %}
+        <tr>
+            <td>{{ j.id }}</td>
+            <td>{{ j.nombre }}</td>
+            <td>{{ j.club }}</td>
+            <td>{{ j.nacionalidad }}</td>
+            <td>{{ j.fecha_nacimiento }}</td>
+            <td>{{ j.altura }}</td>
+            {% if user.is_authenticated %}
+            <td>
+                <a href="{% url 'update_jugadores' j.id %}"><i class="fa-solid fa-file-pen"></i></a>
+                <a href="{% url 'delete_jugadores' j.id %}"><i class="fa-solid fa-trash-can"></i></a>
+            </td>
+            {% endif %}
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>        
+
+{% if user.is_authenticated %}
+<a class="btn btn-light btn-xl" href="{% url 'create_jugadores' %}"><i class="fa-solid fa-circle-plus"></i> Agregar Jugadores</a>
+{% endif %}
+{% endblock datos %}

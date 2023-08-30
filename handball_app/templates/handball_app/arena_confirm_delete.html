@@ -1,0 +1,15 @@
+{% extends 'handball_app/base_onepage.html' %}
+{% load static %}
+
+{% block content %}
+<form method="post" >
+    {% csrf_token %}
+    <h2>Eliminar Arena</h2>
+    <p>Está seguro que desea eliminar a "{{ object }}"?</p>
+    
+    <p class="form-buttons">
+        <input type="submit" class="btn btn-primary" value="Delete">
+        <a href="{% url 'arenas' %}" class="btn btn-outline text-white font-weight-bold">Cancel</a>
+    </p>
+</form>
+{% endblock content %}

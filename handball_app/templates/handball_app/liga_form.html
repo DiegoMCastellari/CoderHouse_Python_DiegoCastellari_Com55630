@@ -1,0 +1,22 @@
+{% extends 'handball_app/base_form.html' %}
+{% load static %}
+
+{% block titulo %}
+    Formulario Ligas
+{% endblock titulo %}
+{% block subtitulo %}
+<p class="text-white-75 mb-5">Agrega una liga a la base de ligas.</p>
+<a class="btn btn-primary btn-xl" href="#datos">Agregar liga!</a>
+{% endblock subtitulo %}  
+
+{% block datos %}
+<h1 class="text-white mt-0">Formulario</h1>
+<form action="" method="post">
+    {% csrf_token %}
+    <table class="mx-auto">
+        {{ form.as_table }}
+    </table>
+    <br>
+    <input class="btn btn-primary" type="submit" value="Enviar">
+</form>    
+{% endblock datos %}

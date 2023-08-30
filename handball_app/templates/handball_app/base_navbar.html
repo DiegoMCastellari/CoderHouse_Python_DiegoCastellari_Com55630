@@ -1,0 +1,64 @@
+{% load static %}
+
+{% block head %}
+{% endblock head %}
+
+<!-- Navigation-->
+<nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
+    <div class="container px-4 px-lg-5">
+        <a class="navbar-brand" href="#page-top">Handball</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ms-auto my-2 my-lg-0">
+                <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Inicio</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'jugadores' %}">Jugadores</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'clubes' %}">Clubes</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'ligas' %}">Ligas</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'arenas' %}">Arenas</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'about' %}">About</a></li>
+                {% if user.is_authenticated %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Formularios
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{% url 'create_jugadores' %}">Agregar Jugadores</a></li>
+                        <li><a class="dropdown-item" href="{% url 'create_clubes' %}">Agregar Clubes</a></li>
+                        <li><a class="dropdown-item" href="{% url 'create_ligas' %}">Agregar Ligas</a></li>
+                        <li><a class="dropdown-item" href="{% url 'create_arenas' %}">Agregar Arenas</a></li>
+                    </ul>
+                </li>
+                {% endif %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">                    
+                        {% if user.is_authenticated %}
+                            {% if request.session.avatar != 'Ningún avatar encontrado' %}
+                            <img src="{{ request.session.avatar }} " height="30px" width="30px">
+                            {% else %}
+                                <i class="fa-solid fa-user"></i>
+                            {% endif %}
+                            {{ user.username }}
+                        {% else %}
+                        <i class="fa-solid fa-user"></i>
+                        {% endif %}
+                    </a>
+                    <ul class="dropdown-menu">
+                        {% if user.is_authenticated %}
+                        <li><a class="dropdown-item" href="{% url 'user_edit' %}">Editar Perfil</a></li>
+                        <li><a class="dropdown-item" href="{% url 'user_avatar' %}">Editar Avatar</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="{% url 'user_logout' %}">Sign Out</a></li>
+                        {% else %}
+                        <li><a class="dropdown-item" href="{% url 'user_login' %}">Sign In</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="{% url 'user_register' %}">Register</a></li>
+                        {% endif %}
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+{% block body_resto %}
+{% endblock body_resto %}

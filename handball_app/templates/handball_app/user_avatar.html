@@ -1,0 +1,16 @@
+{% extends 'handball_app/base_onepage.html' %}
+{% load static %}
+
+{% block content %}
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <h2>Agregar/Editar Avatar</h2>
+    <table class="mx-auto">
+        {{ form.as_table }}
+    </table>
+    <br>
+    <input class="btn btn-primary" type="submit" value="Crear Avatar">
+    <a href="{% url 'home' %}" class="btn btn-outline text-white font-weight-bold">Cancel</a>
+    </p>
+</form>
+{% endblock content %}

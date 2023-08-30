@@ -1,0 +1,22 @@
+{% extends 'handball_app/base_form.html' %}
+{% load static %}
+
+{% block titulo %}
+    Formulario Jugadores
+{% endblock titulo %}
+{% block subtitulo %}
+<p class="text-white-75 mb-5">Agrega un jugador a la base de jugadores.</p>
+<a class="btn btn-primary btn-xl" href="#datos">Agregar jugador!</a>
+{% endblock subtitulo %}   
+
+{% block datos %}
+<h1 class="text-white mt-0">Formulario</h1>
+<form action="" method="post">
+    {% csrf_token %}
+    <table class="mx-auto">
+        {{ form.as_table }}
+    </table>
+    <br>
+    <input class="btn btn-primary" type="submit" value="Enviar">
+</form>    
+{% endblock datos %}
